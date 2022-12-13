@@ -2,7 +2,7 @@ import {Request, Response} from 'express';
 import axios from "axios";
 import * as _ from "lodash";
 import nodeCache = require('node-cache');
-const myCache = new nodeCache({ stdTTL: 0, checkperiod: 60 * 5 });
+const myCache = new nodeCache({ stdTTL: 10, checkperiod: 60 * 5 });
 const express = require('express');
 const cors = require('cors');
 const http = axios.create();
