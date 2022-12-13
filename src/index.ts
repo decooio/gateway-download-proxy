@@ -10,6 +10,7 @@ const server = express();
 const API_CALL_HOST = process.env.API_CALL_HOST || 'http://localhost:3000'
 const API_CALL_PASSWORD = process.env.API_CALL_PASSWORD || 'password'
 const PORT = process.env.PORT || 5051;
+const isProd = (process.env.ENV || 'prod') === 'prod';
 
 server.use(cors());
 server.get('/ipfs/:cid', async (req: Request, res: Response) => {
@@ -29,11 +30,14 @@ server.get('/ipfs/:cid', async (req: Request, res: Response) => {
     } catch (error) {
       if (!_.isEmpty(error.response) && axios.isAxiosError(error) && error.response.status === 403) {
         myCache.set(cid, 'failed')
+        return res.status(403).send('failed');
       }
-      return res.status(403).send('failed');
+      if (!isProd) {
+        console.log(`query order err: ${error.message}`);
+      }
+      return res.status(503).send('failed');
     }
   }
-  console.log(`cacheData: ${cacheData}`);
   return res.status(cacheData === 'ok' ? 200 : 403).send(cacheData);
 });
 
