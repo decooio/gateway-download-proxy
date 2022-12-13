@@ -1,9 +1,9 @@
-name: build (main)
+name: build (master)
 
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 jobs:
   build:
     if: github.repository == 'decooio/gateway-download-proxy'
