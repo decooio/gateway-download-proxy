@@ -1,0 +1,40 @@
+{
+  "name": "gateway-download-proxy",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "repository": "https://github.com/decooio/gateway-download-proxy.git",
+  "contributors": [],
+  "license": "MIT",
+  "scripts": {
+    "dev": "IPFS_HOST=http://localhost:8080 nodemon ./src/index.ts",
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "yarn run compile",
+    "pretest": "yarn run compile",
+    "posttest": "yarn run lint"
+  },
+  "dependencies": {
+    "axios": "^1.2.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/lodash": "^4.14.172",
+    "@types/node": "^14.11.2",
+    "gts": "^3.1.0",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.0.3"
+  },
+  "engines": {
+    "node": ">=11.0.0"
+  }
+}
