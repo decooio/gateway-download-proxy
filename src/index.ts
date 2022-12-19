@@ -14,6 +14,14 @@ const isProd = (process.env.ENV || 'prod') === 'prod';
 
 server.use(cors());
 server.get('/ipfs/:cid', async (req: Request, res: Response) => {
+  return queryIpfsCid(req, res);
+});
+
+server.get('/ipfs/:cid/*', async (req: Request, res: Response) => {
+  return queryIpfsCid(req, res);
+});
+
+async function queryIpfsCid(req: Request, res: Response) {
   const cid = req.params.cid;
   const cacheData = myCache.get(cid);
   if (_.isEmpty(cacheData)) {
@@ -39,6 +47,6 @@ server.get('/ipfs/:cid', async (req: Request, res: Response) => {
     }
   }
   return res.status(cacheData === 'ok' ? 200 : 403).send(cacheData);
-});
+}
 
 server.listen(PORT);
